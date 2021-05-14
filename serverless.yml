@@ -1,10 +1,13 @@
 org: higoralves
 app: serverless-ts
 service: serverless
-frameworkVersion: '2.41.2'
+frameworkVersion: '>=2.41.2'
 
 package:
   excludeDevDependencies: true
+  individually: true
+  exclude:
+    - ./mock
 
 provider:
   name: aws
@@ -23,11 +26,21 @@ custom:
   prune:
     automatic: true
     number: 3
+  jest:
+    preset: ts-jest
+    bail: 1
 
 plugins:
   - serverless-webpack
   - serverless-prune-plugin
+  - serverless-offline
+  - serverless-jest-plugin
 
 functions:
   hello:
     handler: src/functions/hello/hello.hello
+    events:
+      - http:
+          path: test
+          method: get
+          cors: true
