@@ -10,8 +10,9 @@
   },
   "scripts": {
     "dev": "npx nodemon --exec npm run offline",
+    "start": "npx nodemon --exec npm run offline",
     "offline": "npx sls offline start --host 0.0.0.0",
-	  "test": "jest",
+    "test": "jest",
     "test:sls": "npx sls invoke test",
     "prettier": "npx prettier --write src/**/*.{ts,tsx,json}",
     "lint": "tsc --noEmit && eslint --fix --ext ts,tsx .",
@@ -73,6 +74,7 @@
     "pretty-quick": "^3.1.0",
     "serverless": "^2.23.0",
     "serverless-jest-plugin": "^0.3.0",
+    "serverless-localstack": "^0.4.32",
     "serverless-offline": "^7.0.0",
     "serverless-prune-plugin": "^1.5.0",
     "serverless-webpack": "^5.3.5",

@@ -1,5 +1,5 @@
-org: higoralves
-app: serverless-ts
+#org: higoralves
+#app: serverless-ts
 service: serverless
 frameworkVersion: '>=2.41.2'
 
@@ -29,18 +29,21 @@ custom:
   jest:
     preset: ts-jest
     bail: 1
+  serverless-offline:
+    useChildProcesses: true
 
 plugins:
   - serverless-webpack
+  - serverless-localstack
   - serverless-prune-plugin
-  - serverless-offline
   - serverless-jest-plugin
+  - serverless-offline
 
 functions:
   hello:
     handler: src/functions/hello/hello.hello
     events:
       - http:
-          path: test
+          path: hello
           method: get
           cors: true
