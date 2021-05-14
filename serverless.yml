@@ -1,6 +1,6 @@
-org: toroinvestimentos
-app: toro-rewards
-service: toro-rewards-serverless
+org: higoralves
+app: serverless-ts
+service: serverless
 frameworkVersion: '2.41.2'
 
 package:
@@ -11,26 +11,15 @@ provider:
   runtime: nodejs14.x
   stage: ${opt:stage, 'local'}
   lambdaHashingVersion: '20201221'
-  region: ${self:custom.config.region}
+  region: ${opt:stage, 'us-east-1'}
   memorySize: 256
-  apiGateway:
-    shouldStartNameWithService: true
-  vpc: ${self:custom.config.vpc}
-  iam:
-    ${file(./config/serverless/iam.role.yml)}
   environment:
     ${file(./config/env.${self:provider.stage}.json)}
-    REGION: ${self:custom.region}
-    STAGE: ${self:provider.stage}
-    CORS_ALLOW_ORIGIN: ${self:custom.config.cors.ALLOW_ORIGIN}
-    CORS_ALLOW_HEADERS: ${self:custom.config.cors.ALLOW_HEADERS}
-    CORS_ALLOW_METHODS: ${self:custom.config.cors.ALLOW_METHODS}
 
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-  region: ${opt:region, self:provider.region}
   prune:
     automatic: true
     number: 3
@@ -40,7 +29,5 @@ plugins:
   - serverless-prune-plugin
 
 functions:
-  undefined:
-    handler: functions/myFunction/index.handler
   hello:
-    ${file(./src/functions/hello.yml)}
+    handler: src/functions/hello/hello.hello

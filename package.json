@@ -1,6 +1,6 @@
 {
   "name": "serverless-with-typescript",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Serverless aws-nodejs-typescript template",
   "author": "Higor Alves <higor.alves@toroinvestimentos.com.br>",
   "license": "MIT",
