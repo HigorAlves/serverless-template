@@ -1,25 +1,39 @@
-org: higoralves
-app: serverless-template-ts
-service: serverless-template-ts
+org: toroinvestimentos
+app: toro-rewards
+service: toro-rewards-serverless
 frameworkVersion: '2.41.2'
+
+package:
+  excludeDevDependencies: true
 
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: ${opt:stage, 'dev'}
+  stage: ${opt:stage, 'local'}
   lambdaHashingVersion: '20201221'
-  region: us-east-1
-  stackName: serverless-template-ts${sls:stage}
-  apiName: serverless-template-ts${sls:stage}
-  # profile: higoralves
+  region: ${self:custom.config.region}
   memorySize: 256
+  apiGateway:
+    shouldStartNameWithService: true
+  vpc: ${self:custom.config.vpc}
+  iam:
+    ${file(./config/serverless/iam.role.yml)}
   environment:
     ${file(./config/env.${self:provider.stage}.json)}
+    REGION: ${self:custom.region}
+    STAGE: ${self:provider.stage}
+    CORS_ALLOW_ORIGIN: ${self:custom.config.cors.ALLOW_ORIGIN}
+    CORS_ALLOW_HEADERS: ${self:custom.config.cors.ALLOW_HEADERS}
+    CORS_ALLOW_METHODS: ${self:custom.config.cors.ALLOW_METHODS}
 
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  region: ${opt:region, self:provider.region}
+  prune:
+    automatic: true
+    number: 3
 
 plugins:
   - serverless-webpack
