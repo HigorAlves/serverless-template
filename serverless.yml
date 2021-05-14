@@ -1,0 +1,32 @@
+org: higoralves
+app: serverless-template-ts
+service: serverless-template-ts
+frameworkVersion: '2.41.2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  lambdaHashingVersion: '20201221'
+  region: us-east-1
+  stackName: serverless-template-ts${sls:stage}
+  apiName: serverless-template-ts${sls:stage}
+  # profile: higoralves
+  memorySize: 256
+  environment:
+    ${file(./config/env.${self:provider.stage}.json)}
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+plugins:
+  - serverless-webpack
+  - serverless-prune-plugin
+
+functions:
+  undefined:
+    handler: functions/myFunction/index.handler
+  hello:
+    ${file(./src/functions/hello.yml)}

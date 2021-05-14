@@ -1,0 +1,83 @@
+{
+  "name": "serverless-with-typescript",
+  "version": "1.0.0",
+  "description": "Serverless aws-nodejs-typescript template",
+  "author": "Higor Alves <higor.alves@toroinvestimentos.com.br>",
+  "license": "MIT",
+  "private": true,
+  "main": "serverless.ts",
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "scripts": {
+    "test": "jest --ci --verbose",
+    "prettier": "npx prettier --write src/**/*.{ts,tsx,json}",
+    "lint": "tsc --noEmit && eslint --fix --ext ts,tsx .",
+    "release": "standard-version",
+    "release:major": "yarn run release --release-as major --no-verify",
+    "release:minor": "yarn run release --release-as minor --no-verify",
+    "release:patch": "yarn run release --release-as patch --no-verify",
+    "release:alpha": "yarn run release --prerelease alpha --no-verify",
+    "release:beta": "yarn run release --prerelease beta --no-verify"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.{tsx,ts,json}": [
+      "pretty-quick --staged"
+    ]
+  },
+  "dependencies": {
+    "@middy/core": "^1.5.2",
+    "@middy/http-json-body-parser": "^1.5.2",
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.906.0",
+    "env-var": "^7.0.0",
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/config-lerna-scopes": "^12.1.1",
+    "@serverless/typescript": "^2.23.0",
+    "@types/aws-lambda": "^8.10.71",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^14.14.25",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "aws-sdk-mock": "^5.1.0",
+    "commitlint": "^12.1.1",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-standard": "^5.0.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "json-schema-to-ts": "^1.5.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "serverless": "^2.23.0",
+    "serverless-prune-plugin": "^1.5.0",
+    "serverless-webpack": "^5.3.5",
+    "standard-version": "^9.2.0",
+    "ts-jest": "^26.5.6",
+    "ts-loader": "^8.0.15",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
+    "typescript": "^4.1.3",
+    "webpack": "^5.20.2",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
