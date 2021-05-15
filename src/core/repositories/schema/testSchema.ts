@@ -1,4 +1,4 @@
-import { model as Model, Schema } from "dynamoose";
+import { model as Model, Schema } from 'dynamoose'
 
 const schema = new Schema({
 	id: {
@@ -12,4 +12,4 @@ const schema = new Schema({
 	}
 })
 
-export const model = Model(process.env.DYNAMODB_TABLE_NAME, schema);
+export const model = Model(process.env.DYNAMODB_TABLE_NAME, schema)

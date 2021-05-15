@@ -1,15 +1,15 @@
 export class BaseService {
-	private repository: any;
+	private repository: any
 
 	constructor({ repository }) {
-		this.repository = repository;
+		this.repository = repository
 	}
 
 	async create(item) {
-		return this.repository.create(item);
+		return this.repository.create(item)
 	}
 
 	async findOne(id) {
-		return this.repository.findOne(id);
+		return this.repository.findOne(id)
 	}
 }
