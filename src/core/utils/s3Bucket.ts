@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk'
+import AWS from "aws-sdk";
 
 export function S3(): AWS.S3 {
 	const host = process.env.LOCALSTACK_HOST || 'localhost'

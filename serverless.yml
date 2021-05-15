@@ -13,14 +13,41 @@ provider:
   stage: ${opt:stage, 'local'}
   lambdaHashingVersion: '20201221'
   region: ${opt:stage, 'us-east-1'}
-  memorySize: 256
+  memorySize: 128
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:DescribeTable
+      Resource:
+        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}'
   environment:
-    ${file(./config/env.${self:provider.stage}.json)}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    DYNAMODB_TABLE_NAME: 'TestTable'
+    LOCALSTACK_HOST: ${env:LOCALSTACK_HOST, "localhost"}
+    DYNAMODB_PORT: ${env:DYNAMODB_PORT, "4566"}
 
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    start:
+      host: ${self:provider.environment.LOCALSTACK_HOST}
+      port: ${self:provider.environment.DYNAMODB_PORT}
+      migrate: true
+      noStart: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: ${self:provider.environment.DYNAMODB_TABLE_NAME}
+            sources: [ './seed/example-seed.json' ]
   localstack:
     stages:
       - local
@@ -34,9 +61,26 @@ custom:
   serverless-offline:
     useChildProcesses: true
 
+resources:
+  Resources:
+    Test:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_NAME}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
 plugins:
   - serverless-webpack
   - serverless-localstack
+  - serverless-dynamodb-local
   - serverless-prune-plugin
   - serverless-jest-plugin
   - serverless-offline
