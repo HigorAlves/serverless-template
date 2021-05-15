@@ -1,10 +1,21 @@
-import { APIGatewayProxyHandler } from 'aws-lambda'
+import {
+	APIGatewayEventDefaultAuthorizerContext,
+	APIGatewayProxyEventBase,
+	APIGatewayProxyHandler
+} from 'aws-lambda'
 
-export const hello: APIGatewayProxyHandler = async event => {
-	console.log(event.body)
+type IEvent = APIGatewayProxyEventBase<APIGatewayEventDefaultAuthorizerContext>
 
-	return {
-		statusCode: 200,
-		body: 'Its all OK'
+class Handler {
+	async main(event: IEvent): Promise<IResponse> {
+		console.log(event.body)
+
+		return {
+			statusCode: 200,
+			body: 'Its all OK'
+		}
 	}
 }
+
+const handler = new Handler()
+export const hello: APIGatewayProxyHandler = handler.main.bind(handler)

@@ -3,7 +3,7 @@ import { APIGatewayEvent } from 'aws-lambda'
 import { lambdaWrapper } from 'serverless-jest-plugin'
 
 const wrapped = lambdaWrapper.wrap(hello, {
-	handler: 'handler'
+	handler: 'hello'
 })
 
 describe('hello', () => {
@@ -24,7 +24,7 @@ describe('hello', () => {
 			requestContext: undefined,
 			resource: '',
 			stageVariables: undefined,
-			body: 'from test this text',
+			body: 'This is a hello message',
 			headers: null,
 			queryStringParameters: null
 		}

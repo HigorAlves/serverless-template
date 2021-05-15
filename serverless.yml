@@ -1,5 +1,3 @@
-#org: higoralves
-#app: serverless-ts
 service: serverless
 frameworkVersion: '>=2.41.2'
 
@@ -23,6 +21,10 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  localstack:
+    stages:
+      - local
+    autostart: false #disable localstack when deploying
   prune:
     automatic: true
     number: 3

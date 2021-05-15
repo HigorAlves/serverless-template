@@ -1,8 +1,8 @@
 {
-  "name": "serverless-with-typescript",
+  "name": "@jetpack/serverless",
   "version": "0.1.0",
   "description": "Serverless aws-nodejs-typescript template",
-  "author": "Higor Alves <higor.alves@toroinvestimentos.com.br>",
+  "author": "Higor Alves <higorhaalves@gmail.com>",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -12,6 +12,7 @@
     "dev": "npx nodemon --exec npm run offline",
     "start": "npx nodemon --exec npm run offline",
     "offline": "npx sls offline start --host 0.0.0.0",
+	  "deploy": "npx sls deploy",
     "test": "jest",
     "test:sls": "npx sls invoke test",
     "prettier": "npx prettier --write src/**/*.{ts,tsx,json}",
