@@ -10,6 +10,6 @@ const schema = new Schema({
 		type: String,
 		required: true
 	}
-});
+})
 
 export const model = Model(process.env.DYNAMODB_TABLE_NAME, schema);
