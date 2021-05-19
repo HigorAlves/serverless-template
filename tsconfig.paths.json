@@ -3,8 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@functions/*": ["src/functions/*"],
+	    "@core": ["src/core/*"],
       "@libs/*": ["src/libs/*"],
-	    "@settings": ["config/settings.ts"]
+	    "@settings": ["config/settings.ts"],
     }
   }
 }

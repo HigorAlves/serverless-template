@@ -1,7 +1,17 @@
-import { BaseService } from './baseService'
+import { TestRepository } from 'src/core/repositories/testRepository'
 
-export class TestService extends BaseService {
-	constructor({ repository }) {
-		super({ repository })
+export class TestService {
+	repository: TestRepository
+
+	constructor(repository) {
+		this.repository = repository
+	}
+
+	async findOne(id: number) {
+		return this.repository.findOne(id)
+	}
+
+	async create(data: any) {
+		return this.repository.create(data)
 	}
 }

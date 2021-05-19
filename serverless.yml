@@ -24,11 +24,10 @@ provider:
         - dynamodb:DescribeTable
       Resource:
         - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}'
+        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}/index/*'
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-    DYNAMODB_TABLE_NAME: 'TestTable'
-    LOCALSTACK_HOST: ${env:LOCALSTACK_HOST, "localhost"}
-    DYNAMODB_PORT: ${env:DYNAMODB_PORT, "4566"}
+    DYNAMODB_TABLE_NAME: ${self:service}-${self:provider.stage}-test
 
 custom:
   webpack:
@@ -36,18 +35,18 @@ custom:
     includeModules: true
   dynamodb:
     stages:
-      - ${self:provider.stage}
+      - local
     start:
-      host: ${self:provider.environment.LOCALSTACK_HOST}
-      port: ${self:provider.environment.DYNAMODB_PORT}
+      port: 8000
+#      inMemory: true
       migrate: true
-      noStart: true
-      seed: true
-    seed:
-      test:
-        sources:
-          - table: ${self:provider.environment.DYNAMODB_TABLE_NAME}
-            sources: [ './seed/example-seed.json' ]
+#      noStart: true
+#      seed: true
+#    seed:
+#      test:
+#        sources:
+#          - table: ${self:provider.environment.DYNAMODB_TABLE_NAME}
+#            sources: [ './seed/example-seed.json' ]
   localstack:
     stages:
       - local
@@ -66,16 +65,14 @@ resources:
     Test:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:provider.environment.DYNAMODB_TABLE_NAME}
+        TableName: ${self:service}-${self:provider.stage}-test
+        BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
 
 plugins:
   - serverless-webpack

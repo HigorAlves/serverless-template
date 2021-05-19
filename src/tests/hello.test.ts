@@ -6,14 +6,12 @@ const wrapped = lambdaWrapper.wrap(hello, {
 	handler: 'hello'
 })
 
-describe('hello', () => {
+describe('It should test the Hello functions', () => {
 	beforeAll(done => {
-		//  lambdaWrapper.init(liveFunction); // Run the deployed lambda
-
 		done()
 	})
 
-	it('implement tests here', () => {
+	it('implement tests here', async () => {
 		const event: APIGatewayEvent = {
 			httpMethod: '',
 			isBase64Encoded: false,
@@ -28,7 +26,11 @@ describe('hello', () => {
 			headers: null,
 			queryStringParameters: null
 		}
-		const response = wrapped.run(event).then(res => res)
-		expect(response).toBeDefined()
+		const result = {
+			id: '1',
+			name: 'higor alves'
+		}
+		const response = await wrapped.run(event).then(res => res)
+		expect(JSON.parse(response.body)).toEqual(result)
 	})
 })

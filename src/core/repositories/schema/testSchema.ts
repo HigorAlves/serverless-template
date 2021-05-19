@@ -1,15 +1,25 @@
-import { model as Model, Schema } from 'dynamoose'
+import { Document } from 'dynamoose/dist/Document'
 
-const schema = new Schema({
-	id: {
-		type: String,
-		required: true,
-		hashKey: true
-	},
-	name: {
-		type: String,
-		required: true
-	}
-})
+import { DynamoDB } from '../../utils/dynamoDB'
+const { model, Schema } = DynamoDB
 
-export const model = Model(process.env.DYNAMODB_TABLE_NAME, schema)
+const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME
+
+export const testSchema = model<ITestSchema & Document>(
+	TABLE_NAME,
+	new Schema(
+		{
+			id: {
+				type: String,
+				required: true,
+				hashKey: true
+			},
+			name: {
+				type: String
+			}
+		},
+		{
+			timestamps: true
+		}
+	)
+)

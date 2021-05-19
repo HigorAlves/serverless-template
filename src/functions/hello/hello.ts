@@ -1,31 +1,27 @@
-import {
-	APIGatewayEventDefaultAuthorizerContext,
-	APIGatewayProxyEventBase,
-	APIGatewayProxyHandler
-} from 'aws-lambda'
+import { APIGatewayProxyHandler } from 'aws-lambda'
 
 import { createInstance as TestFactory } from '../../core/factories/testFactory'
-import { DynamoDB } from '../../core/utils/dynamoDB'
 
-type IEvent = APIGatewayProxyEventBase<APIGatewayEventDefaultAuthorizerContext>
-
-DynamoDB()
+// type IEvent = APIGatewayProxyEventBase<APIGatewayEventDefaultAuthorizerContext>
 
 class Handler {
-	async main(event: IEvent): Promise<IResponse> {
-		console.log(event)
-		const testFac = await TestFactory()
+	async main(): Promise<IResponse> {
+		try {
+			const testFac = await TestFactory()
 
-		await testFac.create({
-			id: '123123',
-			name: 'higor alves'
-		})
+			await testFac.create({
+				id: '1',
+				name: 'higor alves'
+			})
 
-		const result = await testFac.findOne(123123)
-
-		return {
-			statusCode: 200,
-			body: JSON.stringify(result)
+			const result = await testFac.findOne(1)
+			return {
+				statusCode: 200,
+				body: JSON.stringify(result)
+			}
+		} catch (e) {
+			console.log(e, 'error')
+			return e
 		}
 	}
 }
