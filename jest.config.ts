@@ -7,8 +7,8 @@ export default {
 	clearMocks: true,
 	coverageProvider: 'v8',
 	testEnvironment: 'node',
-	// preset: 'ts-jest',
 	preset: '@shelf/jest-dynamodb',
+	testTimeout: 50000,
 	transform: {
 		'^.+\\.(ts|tsx|js|jsx)$': 'ts-jest'
 	},

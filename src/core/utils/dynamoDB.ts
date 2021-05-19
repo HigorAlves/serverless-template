@@ -9,7 +9,7 @@ let httpAgent = new https.Agent({
 	keepAlive: true
 })
 
-if (!process.env.IS_LOCAL) {
+if (!process.env.IS_LOCAL && !process.env.JEST_WORKER_ID) {
 	dynamoose.aws.sdk.config.update({
 		region: process.env.REGION || 'us-east-1',
 		httpOptions: {
@@ -24,10 +24,19 @@ dynamoose.model.defaults.set({
 	waitForActive: false
 })
 
-if (process.env.IS_LOCAL) {
+if (process.env.IS_LOCAL || process.env.NODE_ENV.includes('test')) {
 	httpAgent = undefined
+	if (process.env.NODE_ENV.includes('test')) {
+		dynamoose.aws.sdk.config.update({
+			region: 'localhost',
+			accessKeyId: 'some_id',
+			secretAccessKey: 'some_secret',
+			sslEnabled: false
+		})
+		dynamoose.aws.ddb.local()
+	} else {
+		dynamoose.aws.ddb.local()
+	}
 }
-
-if (process.env.IS_LOCAL) dynamoose.aws.ddb.local()
 
 export const DynamoDB = dynamoose

@@ -14,7 +14,7 @@ export class TestRepository {
 		try {
 			return await this.schema.query('id').eq(id.toString()).exec()
 		} catch (e) {
-			console.error(e)
+			console.error('SOME ERROR', e)
 		}
 	}
 
@@ -22,7 +22,7 @@ export class TestRepository {
 		try {
 			return await this.schema.create(data)
 		} catch (e) {
-			console.error(e)
+			console.error('SOME ERROR CREATE', e)
 		}
 	}
 }

@@ -36,6 +36,7 @@ custom:
   dynamodb:
     stages:
       - local
+      - test
     start:
       port: 8000
 #      inMemory: true
@@ -57,6 +58,10 @@ custom:
   jest:
     preset: ts-jest
     bail: 1
+    moduleNameMapper:
+      - "@settings": "<rootDir>/config/settings.ts"
+      - "@functions/(.*)": "<rootDir>/src/functions/$1"
+      - "@core/(.*)": "<rootDir>/src/core/$1"
   serverless-offline:
     useChildProcesses: true
 

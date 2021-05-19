@@ -26,11 +26,16 @@ describe('It should test the Hello functions', () => {
 			headers: null,
 			queryStringParameters: null
 		}
-		const result = {
-			id: '1',
-			name: 'higor alves'
-		}
+		const result = [
+			{
+				createdAt: '2021-05-19T21:15:38.952Z',
+				id: '1',
+				name: 'higor alves',
+				updatedAt: '2021-05-19T21:15:38.952Z'
+			}
+		]
+
 		const response = await wrapped.run(event).then(res => res)
-		expect(JSON.parse(response.body)).toEqual(result)
+		expect(JSON.parse(response.body)).toMatchObject(result)
 	})
 })
