@@ -48,6 +48,9 @@
     "env-var": "^7.0.0",
     "http-error": "^0.0.6",
     "middy-autoproxyresponse": "^0.1.0",
+    "serverless-domain-manager": "^5.1.0",
+    "serverless-offline-dynamodb-streams": "^4.2.0",
+    "serverless-plugin-split-stacks": "^1.11.0",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {

@@ -2438,6 +2438,11 @@ atob@^2.1.2:
   resolved "https://registry.npmjs.org/atob/-/atob-2.1.2.tgz"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+aws-info@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aws-info/-/aws-info-1.2.0.tgz#72321268e60aa9210f7a21cd12f7236d8e8b5158"
+  integrity sha512-24q5Rh3bno7ldoyCq99d6hpnLI+PAMocdeVaaGt/5BTQMprvDwQToHfNnruqN11odCHZZIQbRBw+nZo1lTCH9g==
+
 aws-lambda@^1.0.6:
   version "1.0.6"
   resolved "https://registry.npmjs.org/aws-lambda/-/aws-lambda-1.0.6.tgz"
@@ -2476,6 +2481,21 @@ aws-sdk@^2.4.0, aws-sdk@^2.402.0, aws-sdk@^2.7.0, aws-sdk@^2.792.0, aws-sdk@^2.8
   version "2.907.0"
   resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.907.0.tgz"
   integrity sha512-P1gth8sVqXCIjKN78kyD3OosEzqUSYxDG04Cpp2wVGx/djsd5OSv4NkayOhKZ5OMXwk6IdA82oXV/HQR8EjbwQ==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.756.0, aws-sdk@^2.757.0:
+  version "2.910.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.910.0.tgz#7b5f448c6af2caae6c3c956eb56feea3d6dd9b1a"
+  integrity sha512-PC4x3qzxXxZEhd4CbcMdso/WnxeQvsiuYXHL+lb5B5d8zdORcXPaNmyIL/2DByyjJ2Ur4tfXgoQVPDKyYLcWEA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -4195,6 +4215,11 @@ dynamodb-localhost@0.0.9:
     progress "^1.1.8"
     rimraf "^2.6.3"
     tar "^4.4.8"
+
+dynamodb-streams-readable@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dynamodb-streams-readable/-/dynamodb-streams-readable-1.1.0.tgz#f924e63e7f332d9028b324a5fee1aba00d9ab841"
+  integrity sha512-7gJguFEGXHW1XLwL/VbGvafgaG14Slj1uZkgMD/tjynlFkvREpQlqCeyQsVMtpBOeCFq+6TUtvfcR1p8lgj//w==
 
 dynamoose@^2.7.3:
   version "2.7.3"
@@ -7942,7 +7967,7 @@ lodash.union@^4.6.0:
   resolved "https://registry.npmjs.org/lodash.union/-/lodash.union-4.6.0.tgz"
   integrity sha1-SLtQiECfFvGCFmZkHETdGqrjzYg=
 
-lodash@4.17.x, lodash@4.x, lodash@^4.17.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.7.0:
+lodash@4.17.x, lodash@4.x, lodash@^4.17.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.7.0:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -10169,6 +10194,14 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
+serverless-domain-manager@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/serverless-domain-manager/-/serverless-domain-manager-5.1.0.tgz#44c975b4adeac6b32507c92313ee001735d56c55"
+  integrity sha512-uGLGr9nWTupimWxVwz/2S/fK+YULsg8hQ0ZddS1DNerzctIVQBXVbLMGUJv34a9a5HV0YPvVqCA/JBNI7VOSvA==
+  dependencies:
+    aws-sdk "^2.756.0"
+    chalk "^4.1.0"
+
 serverless-dynamodb-local@^0.2.39:
   version "0.2.39"
   resolved "https://registry.yarnpkg.com/serverless-dynamodb-local/-/serverless-dynamodb-local-0.2.39.tgz#9022bb8fa5d2271b1959bf8728b03c8680e66ca2"
@@ -10198,6 +10231,15 @@ serverless-localstack@^0.4.32:
   dependencies:
     aws-sdk "^2.402.0"
     es6-promisify "^6.0.1"
+
+serverless-offline-dynamodb-streams@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline-dynamodb-streams/-/serverless-offline-dynamodb-streams-4.2.0.tgz#ccfe32531846c1c719b216e7326d70ecff40eea2"
+  integrity sha512-dyLamb53rAYwhj7CKfWf7CMWasEl53tt8q46aDbw2+lBc7i1VWi3qxI/2Y+v8bQtlx0+TehkhSVyV1STlyhfrg==
+  dependencies:
+    aws-sdk "^2.757.0"
+    dynamodb-streams-readable "^1.1.0"
+    lodash "^4.17.20"
 
 serverless-offline@^7.0.0:
   version "7.0.0"
@@ -10233,6 +10275,16 @@ serverless-offline@^7.0.0:
     update-notifier "^5.0.1"
     velocityjs "^2.0.3"
     ws "^7.4.2"
+
+serverless-plugin-split-stacks@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/serverless-plugin-split-stacks/-/serverless-plugin-split-stacks-1.11.0.tgz#3f8bdc9f740e565f72657b54f28de72247bb7d11"
+  integrity sha512-lHXs3ONhsWJOP80T+/M/THaepp4y8C1SUng+iycPMVC0U7iDO0v84PlhqPDGDZZ5bDMXXsclE7i4OFv1jE45Lg==
+  dependencies:
+    aws-info "^1.1.0"
+    lodash "^4.17.20"
+    semver "^7.3.4"
+    throat "^6.0.1"
 
 serverless-prune-plugin@^1.5.0:
   version "1.5.0"
@@ -11190,6 +11242,11 @@ throat@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/throat/-/throat-5.0.0.tgz"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
+
+throat@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/throat/-/throat-6.0.1.tgz#d514fedad95740c12c2d7fc70ea863eb51ade375"
+  integrity sha512-8hmiGIJMDlwjg7dlJ4yKGLK8EsYqKgPWbG3b4wjJddKNwc7N7Dpn08Df4szr/sZdMVeOstrdYSsqzX6BYbcB+w==
 
 through2@^2.0.0:
   version "2.0.5"

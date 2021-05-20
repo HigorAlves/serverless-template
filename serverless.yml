@@ -33,7 +33,7 @@ provider:
     DYNAMODB_TABLE_NAME: ${self:custom.database.TABLE_NAME}
 
 custom:
-  config: ${file:(stages/index.stage.yml):${opt:stage, self:provider.stage}}
+  config: ${file(./stages/index.stage.yml):${opt:stage, self:provider.stage}}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
