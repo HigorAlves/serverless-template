@@ -1,4 +1,15 @@
-region: us-east-1
+region: sa-east-1
+
+vpc:
+  securityGroupIds:
+    - sg-097fd36890126a4b9
+  subnetIds:
+    - subnet-00eead0dde1789df3
+    - subnet-01eae2588352ac62b
+    - subnet-076714dee2623c21d
+
+domainName: api-hml.toroinvestimentos.com.br
+
 cors:
   ALLOW_ORIGIN: '*'
   ALLOW_METHODS: 'GET, POST, PATCH, OPTIONS'

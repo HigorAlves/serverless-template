@@ -1,5 +1,16 @@
-region: us-east-1
+region: sa-east-1
+
+vpc:
+  securityGroupIds:
+    - sg-0b157467883d63dca
+  subnetIds:
+    - subnet-07214c52fb9fc8027
+    - subnet-0a90346870eee36cd
+    - subnet-0bd00fafbff3975dd
+
+domainName: api.toroinvestimentos.com.br
+
 cors:
-  ALLOW_ORIGIN: '*'
+  ALLOW_ORIGIN: 'https://rewards.toroinvestimentos.com.br'
   ALLOW_METHODS: 'GET, POST, PATCH, OPTIONS'
   ALLOW_HEADERS: '*'
