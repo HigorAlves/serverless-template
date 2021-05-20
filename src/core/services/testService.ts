@@ -1,4 +1,4 @@
-import { TestRepository } from 'src/core/repositories/testRepository'
+import { TestRepository } from 'core/repositories/testRepository'
 
 export class TestService {
 	repository: TestRepository

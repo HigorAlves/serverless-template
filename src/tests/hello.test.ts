@@ -1,5 +1,5 @@
-import * as handler from '@functions/hello/hello'
 import { APIGatewayEvent } from 'aws-lambda'
+import * as handler from 'functions/hello/hello'
 import { lambdaWrapper } from 'serverless-jest-plugin'
 
 const wrapped = lambdaWrapper.wrap(handler, {
@@ -18,7 +18,8 @@ describe('It should test the Hello functions', () => {
 			multiValueHeaders: undefined,
 			multiValueQueryStringParameters: undefined,
 			path: '',
-			pathParameters: undefined,
+			// @ts-ignore
+			pathParameters: { id: 10 },
 			requestContext: undefined,
 			resource: '',
 			stageVariables: undefined,
@@ -28,14 +29,15 @@ describe('It should test the Hello functions', () => {
 		}
 		const result = [
 			{
-				createdAt: '2021-05-19T21:15:38.952Z',
+				createdAt: new Date(),
 				id: '1',
 				name: 'higor alves',
-				updatedAt: '2021-05-19T21:15:38.952Z'
+				updatedAt: new Date()
 			}
 		]
 
-		const response = await wrapped.run(event).then(res => res)
-		expect(JSON.parse(response.body)).toMatchObject(result)
+		const { body } = (await wrapped.run(event).then(res => res)) as IResponse
+		const response = JSON.parse(body) as ITestSchema
+		expect(response).toBeInstanceOf(result)
 	})
 })

@@ -20,17 +20,26 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - dynamodb:DescribeTable
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
         - dynamodb:Scan
         - dynamodb:Query
-        - dynamodb:DescribeTable
+        - dynamodb:ListStreams
+        - dynamodb:DescribeStream
       Resource:
-        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}'
-        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}/index/*'
+        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.database.userRewardsTable}'
+        - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.database.userRewardsTable}/index/*'
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-    DYNAMODB_TABLE_NAME: ${self:custom.database.TABLE_NAME}
+    USER_REWARDS_TABLE: ${self:custom.database.userRewardsTable}
+    REGION: ${self:provider.region}
+    STAGE: ${self:provider.stage}
+    CORS_ALLOW_ORIGIN: ${self:custom.config.cors.ALLOW_ORIGIN}
+    CORS_ALLOW_HEADERS: ${self:custom.config.cors.ALLOW_HEADERS}
+    CORS_ALLOW_METHODS: ${self:custom.config.cors.ALLOW_METHODS}
 
 custom:
   config: ${file(./stages/index.stage.yml):${opt:stage, self:provider.stage}}
@@ -41,22 +50,32 @@ custom:
     custom: ./stacks-map.ts
     perFunction: false
     perType: false
+    perGroupFunction: false
+  customDomain:
+    domainName: ${self:custom.config.domainName}
+    apiType: rest
+    basePath: signup
+    certificateName: '*.higoralves.dev'
+    createRoute53Record: false
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
   database:
-    TABLE_NAME: ${self:service}-${self:provider.stage}-test
+    userRewardsTable: ${self:service}-${self:provider.stage}-user-rewards
   dynamodb:
     stages:
       - local
       - test
+      - dev
     start:
       port: 8000
       inMemory: true
       migrate: true
       seed: true
     seed:
-      test:
+      userRewards:
         sources:
-          - table: ${self:custom.database.TABLE_NAME}
-            sources: [ './seed/example-seed.json' ]
+          - table: ${self:custom.database.userRewardsTable}
+            sources: [ './seed/userRewardsTable.json' ]
   localstack:
     stages:
       - local
@@ -67,10 +86,6 @@ custom:
   jest:
     preset: ts-jest
     bail: 1
-    moduleNameMapper:
-      - "@settings": "<rootDir>/config/settings.ts"
-      - "@functions/(.*)": "<rootDir>/src/functions/$1"
-      - "@core/(.*)": "<rootDir>/src/core/$1"
   serverless-offline:
     useChildProcesses: true
 
@@ -79,7 +94,7 @@ resources:
     Test:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:service}-${self:provider.stage}-test
+        TableName: ${self:custom.database.userRewardsTable}
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id

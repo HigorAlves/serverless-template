@@ -1,5 +1,5 @@
-import { TestRepository } from '../repositories/testRepository'
-import { TestService } from '../services/testService'
+import { TestRepository } from 'core/repositories/testRepository'
+import { TestService } from 'core/services/testService'
 
 export async function createInstance() {
 	const repository = new TestRepository()

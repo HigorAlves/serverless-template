@@ -5,9 +5,8 @@ import {
 	APIGatewayEventDefaultAuthorizerContext,
 	APIGatewayProxyEventBase
 } from 'aws-lambda'
+import { createInstance as TestFactory } from 'core/factories/testFactory'
 import { autoProxyResponse } from 'middy-autoproxyresponse'
-
-import { createInstance as TestFactory } from '../../core/factories/testFactory'
 
 type IEvent = APIGatewayProxyEventBase<APIGatewayEventDefaultAuthorizerContext>
 
@@ -18,7 +17,7 @@ class Handler {
 			const testFac = await TestFactory()
 
 			await testFac.create({
-				id,
+				id: id.toString(),
 				name: 'Higor Alves'
 			})
 

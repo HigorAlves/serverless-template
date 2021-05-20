@@ -1,10 +1,9 @@
 import { Document } from 'dynamoose/dist/Document'
-
-import { DynamoDB } from '../../utils/dynamoDB'
+import { DynamoDB } from 'utils/dynamoDB'
 const { model, Schema } = DynamoDB
 
-const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME ?? 'serverless-local-test'
-
+const TABLE_NAME =
+	process.env.USER_REWARDS_TABLE ?? 'serverless-template-local-user-rewards'
 export const testSchema = model<ITestSchema & Document>(
 	TABLE_NAME,
 	new Schema(

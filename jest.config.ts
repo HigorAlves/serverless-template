@@ -19,7 +19,9 @@ export default {
 		'!__mocks__'
 	],
 	moduleNameMapper: {
-		'@functions/(.*)': '<rootDir>/src/functions/$1',
-		'@core/(.*)': '<rootDir>/src/core/$1'
+		'functions/(.*)': '<rootDir>/src/functions/$1',
+		'core/(.*)': '<rootDir>/src/core/$1',
+		'utils/(.*)': '<rootDir>/src/core/utils/$1',
+		'interfaces/(.*)': '<rootDir>/src/core/interfaces/$1'
 	}
 }
