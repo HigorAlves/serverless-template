@@ -1,4 +1,4 @@
-service: serverless
+service: serverless-template
 frameworkVersion: '>=2.41.2'
 
 package:
@@ -6,14 +6,17 @@ package:
   individually: true
   exclude:
     - ./mock
+    - ./seed
 
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: ${opt:stage, 'local'}
   lambdaHashingVersion: '20201221'
-  region: ${opt:stage, 'us-east-1'}
+  stage: ${opt:stage, 'local'}
+  region: ${self:custom.config.region}
   memorySize: 128
+  apiGateway:
+    shouldStartNameWithService: true
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -27,27 +30,33 @@ provider:
         - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_NAME}/index/*'
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-    DYNAMODB_TABLE_NAME: ${self:service}-${self:provider.stage}-test
+    DYNAMODB_TABLE_NAME: ${self:custom.database.TABLE_NAME}
 
 custom:
+  config: ${file:(stages/index.stage.yml):${opt:stage, self:provider.stage}}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  splitStacks:
+    custom: ./stacks-map.ts
+    perFunction: false
+    perType: false
+  database:
+    TABLE_NAME: ${self:service}-${self:provider.stage}-test
   dynamodb:
     stages:
       - local
       - test
     start:
       port: 8000
-#      inMemory: true
+      inMemory: true
       migrate: true
-#      noStart: true
-#      seed: true
-#    seed:
-#      test:
-#        sources:
-#          - table: ${self:provider.environment.DYNAMODB_TABLE_NAME}
-#            sources: [ './seed/example-seed.json' ]
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: ${self:custom.database.TABLE_NAME}
+            sources: [ './seed/example-seed.json' ]
   localstack:
     stages:
       - local
@@ -86,12 +95,15 @@ plugins:
   - serverless-prune-plugin
   - serverless-jest-plugin
   - serverless-offline
+  - serverless-offline-dynamodb-streams
+  - serverless-domain-manager
+  - serverless-plugin-split-stacks
 
 functions:
   hello:
-    handler: src/functions/hello/hello.hello
+    handler: src/functions/hello/hello.handler
     events:
       - http:
-          path: hello
+          path: hello/{id}
           method: get
           cors: true

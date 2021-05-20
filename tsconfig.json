@@ -13,7 +13,7 @@
 	  "esModuleInterop": true,
 	  "allowJs": true
   },
-	"include": ["src/**/*.ts", "serverless.ts", "typings/*"],
+	"include": ["src/**/*.ts", "@types/*"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",

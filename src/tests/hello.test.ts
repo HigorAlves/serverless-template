@@ -1,9 +1,9 @@
-import * as hello from '@functions/hello/hello'
+import * as handler from '@functions/hello/hello'
 import { APIGatewayEvent } from 'aws-lambda'
 import { lambdaWrapper } from 'serverless-jest-plugin'
 
-const wrapped = lambdaWrapper.wrap(hello, {
-	handler: 'hello'
+const wrapped = lambdaWrapper.wrap(handler, {
+	handler: 'handler'
 })
 
 describe('It should test the Hello functions', () => {

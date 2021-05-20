@@ -1,0 +1,5 @@
+region: us-east-1
+cors:
+  ALLOW_ORIGIN: '*'
+  ALLOW_METHODS: 'GET, POST, PATCH, OPTIONS'
+  ALLOW_HEADERS: '*'

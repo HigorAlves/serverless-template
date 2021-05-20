@@ -19,7 +19,6 @@ export default {
 		'!__mocks__'
 	],
 	moduleNameMapper: {
-		'@settings': '<rootDir>/config/settings.ts',
 		'@functions/(.*)': '<rootDir>/src/functions/$1',
 		'@core/(.*)': '<rootDir>/src/core/$1'
 	}

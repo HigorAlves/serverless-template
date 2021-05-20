@@ -13,7 +13,7 @@
     "start": "IS_LOCAL=true npx nodemon --exec npm run offline",
     "offline": "npx sls offline start --host 0.0.0.0",
     "deploy": "npx sls deploy",
-	  "dynamodb:kill": "npx fkill -f :8000",
+    "dynamodb:kill": "npx fkill -f :8000",
     "test": "npm run start && npm run jest",
     "test:sls": "npx sls invoke test --stage local --region localhost",
     "prettier": "npx prettier --write src/**/*.{ts,tsx,json}",
@@ -39,11 +39,15 @@
   },
   "dependencies": {
     "@middy/core": "^1.5.2",
+    "@middy/http-error-handler": "^2.2.0",
     "@middy/http-json-body-parser": "^1.5.2",
+    "@middy/validator": "^2.2.0",
     "aws-lambda": "^1.0.6",
     "aws-sdk": "^2.906.0",
     "dynamoose": "^2.7.3",
     "env-var": "^7.0.0",
+    "http-error": "^0.0.6",
+    "middy-autoproxyresponse": "^0.1.0",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {

@@ -1,0 +1,4 @@
+dev: ${file(dev.stage.yml)}
+hml: ${file(hml.stage.yml)}
+local: ${file(local.stage.yml)}
+prd: ${file(local.stage.yml)}
