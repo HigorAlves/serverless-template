@@ -1,0 +1,49 @@
+
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+G
+jest-dynamodb-config.js,1/b/1b474b5e0ca41f41247fc3fb9c1adeab39a9cd8e
+=
+stacks-map.ts,6/c/6c180817e9674c6001d74719a91598151f595b8e
+9
+	yarn.lock,5/3/53585a096fe3a3b96321113856ae62602995a33b
+A
+webpack.config.js,d/5/d5595158cc48f9bf3e51b06f6e6805a8fd2d6262
+P
+ src/core/interfaces/TestTypes.ts,5/0/5018b82a46bf7c778ad9e172b5420e1cc906f598
+J
+src/core/utils/dynamoDB.ts,b/d/bd3b5832194f3226c8668f731016a108a225652e
+W
+'src/core/repositories/testRepository.ts,e/7/e711f88d40c18f4b2f228fcdc6abc3a6cb379218
+<
+package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
+D
+stages/dev.stage.yml,2/3/2309f8ef6b9c58d57671d01a52089fa0a3ae0dca
+G
+src/tests/hello.test.ts,9/6/967624d8f1238277b268635af7cbc70f9e5f3f8b
+L
+src/functions/hello/hello.ts,3/9/39dbc7fe51599cb5730c962b069415ae2b1d4add
+D
+stages/hml.stage.yml,9/b/9bfccecfef7e5a02528ba19c409a8663750a91b9
+F
+stages/index.stage.yml,4/1/41c39ef5215d2174640bcf9c6bb723bb58c3de3a
+>
+jest.config.ts,6/f/6f3e9935ddd4f89ecb1957dfabf848633323c851
+F
+stages/local.stage.yml,c/8/c8a1acd3eca38bbf7f3f9a343140524e417a3902
+D
+stages/prd.stage.yml,4/0/4019507025a3fa80ea5f67b1f2f51b7c8465ae5c
+>
+serverless.yml,5/9/5948f757250f0c470b076eb7741987cdad7a536f
+Q
+!src/core/factories/testFactory.ts,0/a/0afcc563f6d54f53966fff2ffebfc03e770b4f1b
+Z
+*src/core/repositories/schema/testSchema.ts,e/e/ee61bb85bb524b1feaaf5eaaa0354773b751c41a
+P
+ src/core/services/testService.ts,f/4/f4aac85acfdb3544f79ddf873369d9372b1f73c0
+C
+tsconfig.paths.json,9/d/9de64a112f5be7f26775aaed4b32faf54ad2b4f5
+J
+seed/userRewardsTable.json,5/d/5df8290f513e4a8ccf460742432332419bfc899e
+4
+.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
